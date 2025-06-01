@@ -2,7 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="HandheldFriendly" content="true">
     <title>Koperasi Desa Merah Putih Wumbuburo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -21,19 +22,21 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: var(--krem);
             color: var(--hitam);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
         /* Header */
@@ -50,6 +53,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -60,9 +64,10 @@
         .logo-text {
             color: var(--putih);
             background: var(--merah);
-            padding: 10px 15px;
+            padding: 8px 12px;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            white-space: nowrap;
         }
 
         .logo-text span {
@@ -70,19 +75,37 @@
             background: var(--putih);
         }
 
+        nav {
+            width: 100%;
+            order: 3;
+            margin-top: 10px;
+            display: none;
+        }
+
+        nav.active {
+            display: block;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 5px;
         }
 
         nav ul li a {
             color: var(--merah);
             text-decoration: none;
-            padding: 10px 15px;
+            padding: 8px 12px;
             font-weight: 500;
             transition: all 0.3s;
             border-radius: 4px;
-            margin-left: 5px;
+            font-size: 0.9rem;
+            display: block;
         }
 
         nav ul li a:hover {
@@ -90,25 +113,43 @@
             color: var(--putih);
         }
 
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--merah);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('profil.jpg');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: var(--putih);
             text-align: center;
-            padding: 100px 20px;
+            padding: 80px 20px;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: clamp(1.8rem, 5vw, 3rem);
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             margin: 0 auto 30px;
         }
 
@@ -116,12 +157,13 @@
             display: inline-block;
             background: var(--merah);
             color: var(--putih);
-            padding: 12px 30px;
+            padding: 10px 25px;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
             transition: all 0.3s;
             border: 2px solid var(--merah);
+            font-size: 0.9rem;
         }
 
         .btn:hover {
@@ -132,14 +174,15 @@
 
         /* Section Styling */
         section {
-            padding: 80px 0;
+            padding: 60px 0;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             position: relative;
             color: var(--merah);
+            font-size: clamp(1.5rem, 3vw, 2rem);
         }
 
         .section-title:after {
@@ -163,29 +206,30 @@
 
         .about-text {
             flex: 1;
-            min-width: 300px;
+            min-width: 100%;
         }
 
         .about-text h3 {
             color: var(--merah);
             margin-bottom: 20px;
+            font-size: 1.3rem;
         }
 
         .about-image {
             flex: 1;
-            min-width: 300px;
+            min-width: 100%;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('backgroung.jpg');
             background-size: cover;
             background-position: center;
             border-radius: 10px;
-            height: 350px;
+            height: 300px;
         }
 
         /* Pengurus Section */
         .pengurus-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            gap: 20px;
         }
 
         .pengurus-card {
@@ -194,6 +238,7 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s;
+            margin-bottom: 20px;
         }
 
         .pengurus-card:hover {
@@ -201,35 +246,37 @@
         }
 
         .pengurus-img {
-            height: 200px;
+            height: 180px;
             background: var(--abu);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--merah);
-            font-size: 4rem;
+            font-size: 3rem;
         }
 
         .pengurus-info {
-            padding: 20px;
+            padding: 15px;
             text-align: center;
         }
 
         .pengurus-info h3 {
             color: var(--merah);
             margin-bottom: 5px;
+            font-size: 1.1rem;
         }
 
         .pengurus-info p {
             font-weight: 500;
             color: var(--coklat);
+            font-size: 0.9rem;
         }
 
         /* Modal Section */
         .modal-container {
             background: var(--putih);
             border-radius: 10px;
-            padding: 30px;
+            padding: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             max-width: 600px;
             margin: 0 auto;
@@ -238,8 +285,9 @@
         .modal-item {
             display: flex;
             justify-content: space-between;
-            padding: 15px 0;
+            padding: 12px 0;
             border-bottom: 1px solid var(--abu);
+            flex-wrap: wrap;
         }
 
         .modal-item:last-child {
@@ -249,17 +297,21 @@
         .modal-item .label {
             font-weight: bold;
             color: var(--merah);
+            width: 45%;
+            margin-bottom: 5px;
         }
 
         .modal-item .value {
             font-weight: 500;
+            width: 50%;
+            text-align: right;
         }
 
         /* Bidang Usaha */
         .usaha-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .usaha-card {
@@ -267,10 +319,11 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
 
         .usaha-img {
-            height: 200px;
+            height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -294,54 +347,62 @@
         }
 
         .usaha-info {
-            padding: 20px;
+            padding: 15px;
         }
 
         .usaha-info h3 {
             color: var(--merah);
             margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .usaha-info p {
+            font-size: 0.9rem;
         }
 
         /* Lokasi Section */
         .lokasi-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 20px;
         }
 
         .lokasi-info {
             flex: 1;
-            min-width: 300px;
+            min-width: 100%;
             background: var(--putih);
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .lokasi-info h3 {
             color: var(--merah);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
         }
 
         .lokasi-detail {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .lokasi-detail p {
             margin-bottom: 10px;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            font-size: 0.9rem;
         }
 
         .lokasi-detail i {
             color: var(--merah);
             margin-right: 10px;
-            width: 25px;
+            width: 20px;
+            margin-top: 3px;
         }
 
         .lokasi-map {
             flex: 1;
-            min-width: 300px;
+            min-width: 100%;
             background: var(--abu);
             border-radius: 10px;
             overflow: hidden;
@@ -349,28 +410,29 @@
             align-items: center;
             justify-content: center;
             color: var(--merah);
-            font-size: 1.2rem;
+            font-size: 1rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 300px;
         }
 
         /* Footer */
         footer {
             background: var(--hitam);
             color: var(--putih);
-            padding: 50px 0 20px;
+            padding: 40px 0 20px;
         }
 
         .footer-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
             margin-bottom: 30px;
         }
 
         .footer-col h3 {
             color: var(--merah);
-            margin-bottom: 20px;
-            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
 
         .footer-col ul {
@@ -378,29 +440,35 @@
         }
 
         .footer-col ul li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .footer-col ul li a {
             color: var(--abu);
             text-decoration: none;
             transition: color 0.3s;
+            font-size: 0.9rem;
         }
 
         .footer-col ul li a:hover {
             color: var(--merah);
         }
 
+        .footer-col p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
         .social-links {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 15px;
         }
 
         .social-links a {
             display: inline-block;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
             display: flex;
@@ -408,6 +476,7 @@
             justify-content: center;
             color: var(--putih);
             transition: all 0.3s;
+            font-size: 0.9rem;
         }
 
         .social-links a:hover {
@@ -419,50 +488,58 @@
             text-align: center;
             padding-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--abu);
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .header-container {
-                flex-direction: column;
+                flex-direction: row;
             }
             
-            nav ul {
-                margin-top: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
+            nav {
+                width: auto;
+                order: 0;
+                margin-top: 0;
+                display: block;
             }
             
-            nav ul li {
-                margin-bottom: 10px;
+            .menu-toggle {
+                display: none;
             }
             
-            .hero h1 {
-                font-size: 2rem;
+            .about-text, .about-image {
+                min-width: calc(50% - 15px);
             }
             
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            section {
-                padding: 60px 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo-text {
-                font-size: 1rem;
+            .lokasi-info, .lokasi-map {
+                min-width: calc(50% - 10px);
             }
             
             .hero {
-                padding: 80px 20px;
+                padding: 100px 20px;
             }
             
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+        }
+
+        /* iOS specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            .hero {
+                background-attachment: scroll;
             }
         }
     </style>
@@ -474,13 +551,18 @@
             <div class="logo">
                 <div class="logo-text">KOPERASI <span>MERAH PUTIH</span></div>
             </div>
-            <nav>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
                 <ul>
                     <li><a href="#beranda">Beranda</a></li>
                     <li><a href="#tentang">Tentang Kami</a></li>
-                    <li><a href="#pengurus">Struktur Pengurus</a></li>
-                    <li><a href="#modal">Modal Koperasi</a></li>
-                    <li><a href="#usaha">Bidang Usaha</a></li>
+                    <li><a href="#pengurus">Pengurus</a></li>
+                    <li><a href="#modal">Modal</a></li>
+                    <li><a href="#usaha">Usaha</a></li>
                     <li><a href="#lokasi">Lokasi</a></li>
                 </ul>
             </nav>
@@ -489,7 +571,7 @@
 
     <!-- Hero Section -->
     <section class="hero" id="beranda">
-        <div class="container">
+        <div class="container hero-content">
             <h1>Koperasi Desa Merah Putih Wumbuburo</h1>
             <p>Bersama Membangun Ekonomi Desa Melalui Semangat Gotong Royong dan Kekeluargaan</p>
             <a href="#usaha" class="btn">Lihat Produk Kami</a>
@@ -684,9 +766,9 @@
                     <ul>
                         <li><a href="#beranda">Beranda</a></li>
                         <li><a href="#tentang">Tentang Kami</a></li>
-                        <li><a href="#pengurus">Struktur Pengurus</a></li>
-                        <li><a href="#modal">Modal Koperasi</a></li>
-                        <li><a href="#usaha">Bidang Usaha</a></li>
+                        <li><a href="#pengurus">Pengurus</a></li>
+                        <li><a href="#modal">Modal</a></li>
+                        <li><a href="#usaha">Usaha</a></li>
                         <li><a href="#lokasi">Lokasi</a></li>
                     </ul>
                 </div>
@@ -719,15 +801,39 @@
     </footer>
 
     <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        
+        menuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            this.innerHTML = mainNav.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth < 768) {
+                    mainNav.classList.remove('active');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+
         // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
@@ -742,19 +848,23 @@
         });
 
         // Animation on scroll
-        window.addEventListener('scroll', function() {
+        function animateOnScroll() {
             const sections = document.querySelectorAll('section');
+            const windowHeight = window.innerHeight;
+            const triggerPoint = windowHeight * 0.75;
+            
             sections.forEach(section => {
-                const position = section.getBoundingClientRect();
-                if (position.top < window.innerHeight * 0.75) {
+                const sectionTop = section.getBoundingClientRect().top;
+                
+                if (sectionTop < triggerPoint) {
                     section.style.opacity = 1;
                     section.style.transform = 'translateY(0)';
                 }
             });
-        });
+        }
 
         // Initialize animations
-        window.onload = function() {
+        window.addEventListener('load', function() {
             document.querySelectorAll('section').forEach(section => {
                 section.style.opacity = 0;
                 section.style.transform = 'translateY(20px)';
@@ -763,15 +873,21 @@
             
             // Trigger initial animations
             setTimeout(() => {
-                document.querySelectorAll('section').forEach(section => {
-                    const position = section.getBoundingClientRect();
-                    if (position.top < window.innerHeight) {
-                        section.style.opacity = 1;
-                        section.style.transform = 'translateY(0)';
-                    }
-                });
+                animateOnScroll();
             }, 300);
-        };
+            
+            // Set up scroll event listener
+            window.addEventListener('scroll', animateOnScroll);
+        });
+
+        // Fix for iOS viewport height
+        function setVhUnit() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        
+        setVhUnit();
+        window.addEventListener('resize', setVhUnit);
     </script>
 </body>
 </html>
