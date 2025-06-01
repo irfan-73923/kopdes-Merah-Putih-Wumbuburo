@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koperasi Desa Merah Putih Wumbuburo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --merah: #e74c3c;
+            --putih: #ffffff;
+            --krem: #f8f1e5;
+            --hijau: #27ae60;
+            --coklat: #8B4513;
+            --hitam: #333333;
+            --abu: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--krem);
+            color: var(--hitam);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, var(--merah) 50%, var(--putih) 50%);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
+            color: var(--putih);
+            background: var(--merah);
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo-text span {
+            color: var(--merah);
+            background: var(--putih);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: var(--merah);
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+
+        nav ul li a:hover {
+            background: var(--merah);
+            color: var(--putih);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('profil.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--putih);
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--merah);
+            color: var(--putih);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid var(--merah);
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--putih);
+            border-color: var(--putih);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            color: var(--merah);
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--merah);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            color: var(--merah);
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('backgroung.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            height: 350px;
+        }
+
+        /* Pengurus Section */
+        .pengurus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .pengurus-card {
+            background: var(--putih);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .pengurus-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pengurus-img {
+            height: 200px;
+            background: var(--abu);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--merah);
+            font-size: 4rem;
+        }
+
+        .pengurus-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .pengurus-info h3 {
+            color: var(--merah);
+            margin-bottom: 5px;
+        }
+
+        .pengurus-info p {
+            font-weight: 500;
+            color: var(--coklat);
+        }
+
+        /* Modal Section */
+        .modal-container {
+            background: var(--putih);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .modal-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--abu);
+        }
+
+        .modal-item:last-child {
+            border-bottom: none;
+        }
+
+        .modal-item .label {
+            font-weight: bold;
+            color: var(--merah);
+        }
+
+        .modal-item .value {
+            font-weight: 500;
+        }
+
+        /* Bidang Usaha */
+        .usaha-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .usaha-card {
+            background: var(--putih);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .usaha-img {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--putih);
+            font-size: 2rem;
+        }
+
+        .usaha-img.kopra {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('kopra.jpg');
+            background-size: cover;
+        }
+
+        .usaha-img.gula {
+             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('gula-kelapa.jpg');
+            background-size: cover;
+        }
+
+        .usaha-img.air {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('air-mineral.jpg');
+            background-size: cover;
+        }
+
+        .usaha-info {
+            padding: 20px;
+        }
+
+        .usaha-info h3 {
+            color: var(--merah);
+            margin-bottom: 10px;
+        }
+
+        /* Lokasi Section */
+        .lokasi-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .lokasi-info {
+            flex: 1;
+            min-width: 300px;
+            background: var(--putih);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .lokasi-info h3 {
+            color: var(--merah);
+            margin-bottom: 20px;
+        }
+
+        .lokasi-detail {
+            margin-bottom: 20px;
+        }
+
+        .lokasi-detail p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .lokasi-detail i {
+            color: var(--merah);
+            margin-right: 10px;
+            width: 25px;
+        }
+
+        .lokasi-map {
+            flex: 1;
+            min-width: 300px;
+            background: var(--abu);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--merah);
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--hitam);
+            color: var(--putih);
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h3 {
+            color: var(--merah);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--abu);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--merah);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--putih);
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--merah);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: var(--abu);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin-bottom: 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1rem;
+            }
+            
+            .hero {
+                padding: 80px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-text">KOPERASI <span>MERAH PUTIH</span></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#beranda">Beranda</a></li>
+                    <li><a href="#tentang">Tentang Kami</a></li>
+                    <li><a href="#pengurus">Struktur Pengurus</a></li>
+                    <li><a href="#modal">Modal Koperasi</a></li>
+                    <li><a href="#usaha">Bidang Usaha</a></li>
+                    <li><a href="#lokasi">Lokasi</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="beranda">
+        <div class="container">
+            <h1>Koperasi Desa Merah Putih Wumbuburo</h1>
+            <p>Bersama Membangun Ekonomi Desa Melalui Semangat Gotong Royong dan Kekeluargaan</p>
+            <a href="#usaha" class="btn">Lihat Produk Kami</a>
+        </div>
+    </section>
+
+    <!-- Tentang Kami -->
+    <section id="tentang">
+        <div class="container">
+            <h2 class="section-title">Tentang Kami</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Sejarah Koperasi</h3>
+                    <p>Koperasi Desa Merah Putih Wumbuburo lahir dari semangat gotong royong, sebagai jawaban atas kebutuhan masyarakat desa untuk bergerak bersama dalam membangun kemandirian ekonomi. Berdiri di atas nilai-nilai kebersamaan, keadilan, dan tanggung jawab kolektif, koperasi ini menjadi sarana untuk mengelola potensi lokal secara lebih terarah dan berkelanjutan.</p>
+                    <p>Kami percaya, kekuatan desa terletak pada kerja sama antarwarga. Melalui koperasi, kami menghimpun daya, menyatukan visi, dan menciptakan peluang usaha yang memberi manfaat nyata bagi seluruh anggota. Tidak sekadar lembaga ekonomi, koperasi kami adalah simbol persatuan dan kedaulatan ekonomi rakyat desa, sejalan dengan semangat merah putih yang kami junjung.</p>
+                    <p>Dengan langkah profesional dan berbasis nilai-nilai lokal, Koperasi Merah Putih Wumbuburo terus tumbuh sebagai wadah pemberdayaan masyarakat—membangun dari desa, untuk Indonesia.</p>
+                </div>
+                <div class="about-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Struktur Pengurus -->
+    <section id="pengurus" style="background-color: var(--abu);">
+        <div class="container">
+            <h2 class="section-title">Struktur Pengurus</h2>
+            <div class="pengurus-grid">
+                <div class="pengurus-card">
+                    <div class="pengurus-img">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="pengurus-info">
+                        <h3>IRFAN, A.Mk</h3>
+                        <p>Ketua Koperasi</p>
+                    </div>
+                </div>
+                
+                <div class="pengurus-card">
+                    <div class="pengurus-img">
+                        <i class="fas fa-user-edit"></i>
+                    </div>
+                    <div class="pengurus-info">
+                        <h3>DELFI ATMANINGSI, S.P</h3>
+                        <p>Sekretaris</p>
+                    </div>
+                </div>
+                
+                <div class="pengurus-card">
+                    <div class="pengurus-img">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="pengurus-info">
+                        <h3>ZULMAN, S.Pd.i</h3>
+                        <p>Bendahara</p>
+                    </div>
+                </div>
+                
+                <div class="pengurus-card">
+                    <div class="pengurus-img">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="pengurus-info">
+                        <h3>DARMATI</h3>
+                        <p>Wakil Bidang Usaha</p>
+                    </div>
+                </div>
+                
+                <div class="pengurus-card">
+                    <div class="pengurus-img">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="pengurus-info">
+                        <h3>RUSDIANTO, S.Ag</h3>
+                        <p>Wakil Bidang Keanggotaan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Koperasi -->
+    <section id="modal">
+        <div class="container">
+            <h2 class="section-title">Modal Koperasi</h2>
+            <div class="modal-container">
+                <div class="modal-item">
+                    <span class="label">Simpanan Pokok</span>
+                    <span class="value">Rp. 50.000,-</span>
+                </div>
+                <div class="modal-item">
+                    <span class="label">Simpanan Wajib</span>
+                    <span class="value">Rp. 50.000,- / Bulan</span>
+                </div>
+                <div class="modal-item">
+                    <span class="label">Status Keanggotaan</span>
+                    <span class="value">Terbuka untuk seluruh warga Desa Wumbuburo</span>
+                </div>
+                <div class="modal-item">
+                    <span class="label">Manfaat Keanggotaan</span>
+                    <span class="value">Bunga simpanan, bagi hasil, layanan prioritas</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bidang Usaha -->
+    <section id="usaha" style="background-color: var(--abu);">
+        <div class="container">
+            <h2 class="section-title">Bidang Usaha</h2>
+            <div class="usaha-grid">
+                <div class="usaha-card">
+                    <div class="usaha-img kopra">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="usaha-info">
+                        <h3>Kopra Putih</h3>
+                        <p>Kami mengelola hasil perkebunan kelapa warga menjadi kopra putih berkualitas tinggi. Produk kami telah memenuhi standar pasar lokal dan nasional dengan proses produksi yang higienis dan modern.</p>
+                    </div>
+                </div>
+                
+                <div class="usaha-card">
+                    <div class="usaha-img gula">
+                        <i class="fas fa-wine-bottle"></i>
+                    </div>
+                    <div class="usaha-info">
+                        <h3>Gula Kelapa</h3>
+                        <p>Kami menyediakan tempat penampungan dan pengolahan gula kelapa yang mempertahankan kualitas dan keaslian produk. Gula kelapa kami diproses secara tradisional dengan standar kebersihan tinggi.</p>
+                    </div>
+                </div>
+                
+                <div class="usaha-card">
+                    <div class="usaha-img air">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="usaha-info">
+                        <h3>Air Mineral</h3>
+                        <p>Kami mengelola sumber mata air alami Desa Wumbuburo menjadi air mineral yang segar dan menyehatkan. Proses pengolahan menggunakan teknologi modern dengan tetap menjaga kualitas sumber air.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lokasi -->
+    <section id="lokasi">
+        <div class="container">
+            <h2 class="section-title">Lokasi Kantor</h2>
+            <div class="lokasi-container">
+                <div class="lokasi-info">
+                    <h3>Kantor Koperasi</h3>
+                    <div class="lokasi-detail">
+                        <p><i class="fas fa-map-marker-alt"></i> <strong>Alamat:</strong> Desa Wumbuburo, Dusun Balo II (Samping Masjid Nurul Falah Desa Wumbuburo)</p>
+                        <p><i class="fas fa-clock"></i> <strong>Jam Operasional:</strong> Senin - Jumat: 08.00 - 16.00 WIB, Sabtu: 08.00 - 14.00 WIB</p>
+                        <p><i class="fas fa-phone"></i> <strong>Telepon:</strong> (0431) 123456</p>
+                        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> koperasi@merahputihwumbuburo.id</p>
+                    </div>
+                    <h3 style="margin-top: 30px;">Visi & Misi</h3>
+                    <p><strong>Visi:</strong> Menjadi koperasi terdepan dalam pemberdayaan ekonomi masyarakat Desa Wumbuburo.</p>
+                    <p><strong>Misi:</strong> 
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Meningkatkan kesejahteraan anggota dan masyarakat</li>
+                            <li>Mengembangkan potensi ekonomi lokal</li>
+                            <li>Menyediakan layanan keuangan yang terjangkau</li>
+                            <li>Menjaga kelestarian lingkungan dalam setiap kegiatan usaha</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="lokasi-map">
+                    <i class="fas fa-map-marked-alt"></i> Peta Lokasi Koperasi
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Koperasi Desa Merah Putih Wumbuburo</h3>
+                    <p>Bersama Membangun Ekonomi Desa melalui semangat gotong royong dan kekeluargaan.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Menu Utama</h3>
+                    <ul>
+                        <li><a href="#beranda">Beranda</a></li>
+                        <li><a href="#tentang">Tentang Kami</a></li>
+                        <li><a href="#pengurus">Struktur Pengurus</a></li>
+                        <li><a href="#modal">Modal Koperasi</a></li>
+                        <li><a href="#usaha">Bidang Usaha</a></li>
+                        <li><a href="#lokasi">Lokasi</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Produk Kami</h3>
+                    <ul>
+                        <li><a href="#">Kopra Putih</a></li>
+                        <li><a href="#">Gula Kelapa</a></li>
+                        <li><a href="#">Air Mineral</a></li>
+                        <li><a href="#">Simpanan Anggota</a></li>
+                        <li><a href="#">Pinjaman Usaha</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Desa Wumbuburo, Dusun Balo II</li>
+                        <li><i class="fas fa-phone"></i> (0431) 123456</li>
+                        <li><i class="fas fa-envelope"></i> koperasi@merahputihwumbuburo.id</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Koperasi Desa Merah Putih Wumbuburo. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Animation on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const position = section.getBoundingClientRect();
+                if (position.top < window.innerHeight * 0.75) {
+                    section.style.opacity = 1;
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize animations
+        window.onload = function() {
+            document.querySelectorAll('section').forEach(section => {
+                section.style.opacity = 0;
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'all 0.6s ease-out';
+            });
+            
+            // Trigger initial animations
+            setTimeout(() => {
+                document.querySelectorAll('section').forEach(section => {
+                    const position = section.getBoundingClientRect();
+                    if (position.top < window.innerHeight) {
+                        section.style.opacity = 1;
+                        section.style.transform = 'translateY(0)';
+                    }
+                });
+            }, 300);
+        };
+    </script>
+</body>
+</html>
