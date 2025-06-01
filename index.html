@@ -59,6 +59,12 @@
         .logo {
             display: flex;
             align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
         }
 
         .logo-text {
@@ -320,6 +326,11 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .usaha-card:hover {
+            transform: translateY(-5px);
         }
 
         .usaha-img {
@@ -329,6 +340,22 @@
             justify-content: center;
             color: var(--putih);
             font-size: 2rem;
+            position: relative;
+        }
+
+        .usaha-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            transition: background 0.3s;
+        }
+
+        .usaha-card:hover .usaha-img::after {
+            background: rgba(0,0,0,0.1);
         }
 
         .usaha-img.kopra {
@@ -549,6 +576,7 @@
     <header>
         <div class="container header-container">
             <div class="logo">
+                <img src="logo.png" alt="Logo Koperasi Merah Putih Wumbuburo" class="logo-img">
                 <div class="logo-text">KOPERASI <span>MERAH PUTIH</span></div>
             </div>
             
@@ -572,6 +600,7 @@
     <!-- Hero Section -->
     <section class="hero" id="beranda">
         <div class="container hero-content">
+            <img src="logo-koperasi-white.png" alt="Logo Koperasi" style="height: 80px; margin-bottom: 20px;">
             <h1>Koperasi Desa Merah Putih Wumbuburo</h1>
             <p>Bersama Membangun Ekonomi Desa Melalui Semangat Gotong Royong dan Kekeluargaan</p>
             <a href="#usaha" class="btn">Lihat Produk Kami</a>
@@ -751,7 +780,7 @@
         <div class="container">
             <div class="footer-container">
                 <div class="footer-col">
-                    <h3>Koperasi Desa Merah Putih Wumbuburo</h3>
+                    <img src="logo-koperasi-white.png" alt="Logo Koperasi" style="height: 60px; margin-bottom: 15px;">
                     <p>Bersama Membangun Ekonomi Desa melalui semangat gotong royong dan kekeluargaan.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
